@@ -213,40 +213,38 @@ namespace SEPEscribania
 
         }
 
-        private void btnSaveAs_Click(object sender, EventArgs e)
-        {/*
+        public void AbrirSave() {
+            /*
             Esta funcion permite visualizar el panel desde donde se
             podra guardar el documento, permitiendo seleccionar la carpeta, 
             el cliente, el año es por default, el que está seleccionado en el combobox,
             el path del documento, el tipo d edocumetno, el titulo y las palabras relacionadas para la busqueda.
              */
-                try
+            try
+            {
+                if (oWord.Documents.Count > 0)
                 {
-                    if (oWord.Documents.Count > 0)
-                    {
-                        HabSave(true);
+                    HabSave(true);
                     Tipo_Doc tipo = new Tipo_Doc();
                     List<Tipo_Doc> tipos = new List<Tipo_Doc>();
                     tipos = tipo.TraerListaTipos();
                     Dictionary<Int32, string> dictionary = new Dictionary<Int32, string>();
 
-                    foreach (Tipo_Doc ti in tipos) {
-                        dictionary.Add(ti.Id,ti.Tipo1);
+                    foreach (Tipo_Doc ti in tipos)
+                    {
+                        dictionary.Add(ti.Id, ti.Tipo1);
                     }
-                    cbCliente.DataSource = new BindingSource(dictionary,null);
+                    cbCliente.DataSource = new BindingSource(dictionary, null);
                     cbCliente.DisplayMember = "Value";
                     cbCliente.ValueMember = "Key";
-                    ///cbCliente.Items.Add(ti.Tipo1);
                     cbCliente.SelectedIndex = 0;
                     lbDocRuta.Text = @"C:\Euresis_Escribania\" + dtpFecha.Text;
                     Documento doc = new Documento();
                     doc.TraerPath(oDoc.FullName);
-                    
-                    
+
+
                     if (doc.Id > 0)
                     {
-                        documento = doc;
-                        MessageBox.Show(documento.Path1);
                         btnEliminar.Enabled = true;
                         string[] nombre = doc.Titulo1.Split('.');
                         txNombre.Text = nombre[0];
@@ -279,15 +277,26 @@ namespace SEPEscribania
                     else { btnEliminar.Enabled = false; }
 
                 }
-                    else
-                    {
-                        MessageBox.Show("SELECCIONE ARCHIVO", "SEP", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-                catch
+                else
                 {
-                    Cerrar();
+                    MessageBox.Show("SELECCIONE ARCHIVO", "SEP", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+            catch
+            {
+                Cerrar();
+            }
+
+        }
+
+        private void btnSaveAs_Click(object sender, EventArgs e)
+        {/*
+            Esta funcion permite visualizar el panel desde donde se
+            podra guardar el documento, permitiendo seleccionar la carpeta, 
+            el cliente, el año es por default, el que está seleccionado en el combobox,
+            el path del documento, el tipo d edocumetno, el titulo y las palabras relacionadas para la busqueda.
+             */
+            AbrirSave();
             }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -313,7 +322,11 @@ namespace SEPEscribania
             Esta funcion es la encargada de guardar el documento word abierto desde el programa.
             Guarda el documento en la carpeta desde la que fué abierto.    
              */
-            try
+            chModificar.Checked = true;
+            documento = new Documento();
+            documento.TraerPath(oDoc.FullName);
+            AbrirSave();
+           /* try
                 {
                     if (oWord.Documents.Count > 0)
                     {
@@ -333,13 +346,15 @@ namespace SEPEscribania
                 catch
                 {
                 }
-                Cerrar();
+                Cerrar();*/
             
 
         }
         public void LimpiarSave() {
             if (pnGuardar.Visible == true)
             {
+                documento = null;
+                chModificar.Checked = false;
                 txNombre.Clear();
                 lbPath.Text = "";
                 HabSave(false);
@@ -361,9 +376,6 @@ namespace SEPEscribania
             bool lOk;
             string[] palabras;
             lbDocRuta.Text = @"C:\\Euresis_Escribania\\" + dtpFecha.Text;
-            fbDialog.Description = "SELECCIONE CARPETA";
-            fbDialog.RootFolder = Environment.SpecialFolder.MyComputer;
-            fbDialog.SelectedPath = lbPath.Text;
             Int32 nIdT = ((KeyValuePair<Int32, string>)cbCliente.SelectedItem).Key;//obtiene id tipo del combobox
             lOk = ValidarTexto(txNombre,"NOMBRE");
             if (lOk) {
@@ -393,14 +405,26 @@ namespace SEPEscribania
                     string sRuta = lbDocRuta.Text;
                     sRuta = sRuta.Replace(@"\\", @"/");//Esta operacion escapa la barra invertida para poder guardarla en BD
                     Documento doc = new Documento();
+                    Palabras_Busqueda pl = new Palabras_Busqueda();
                     doc.Titulo1 = txNombre.Text;
                     doc.Path1 = sRuta + @"/" + txNombre.Text + ".docx";
                     doc.IdCliente = Int32.Parse(txIdC.Text);
                     doc.IdTipo = nIdT;
                     doc.Anio1 = dtpFecha.Text;
-                    int nIdDoc = doc.Guardar();
+                    int nIdDoc = 0;
+                    if (chModificar.Checked)//si true, se presionó el boton modificar
+                    {
+                        nIdDoc = documento.Id;
+                        pl.EliminarId(nIdDoc);
+                        doc.ModificarDocumento();  
+                    }
+                    else {
+                        nIdDoc = doc.Guardar();//si false, se guarda como un nuevo registro
+                    }
+
+                    
                     if (txPalabras.Text!="") {
-                        Palabras_Busqueda pl = new Palabras_Busqueda();
+                        
                        lOk = pl.Guardar_Palabras(txPalabras.Text, nIdDoc);
                     }
                     
@@ -423,7 +447,8 @@ namespace SEPEscribania
                 IniPat();
                 Cerrar();
             }
-            
+            chModificar.Checked = false;
+            documento = null;
 
         }
         public void IniPat() {

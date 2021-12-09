@@ -143,8 +143,8 @@ namespace SEPEscribania
                           " idCliente =" + IdCliente + "," +
                           " idTipo =" + IdTipo + "," +
                           " Anio ='" + Anio + "'," +
-                          " Path ='" + Path1 + "'" +
-                          " Titulo ='" + Titulo1 + "'," +
+                          " Path ='" + Path1 + "'," +
+                          " Titulo ='" + Titulo1 + "'" +
                           " Where id= " + Id;
             if (db.Insertar(sSQL))
             {

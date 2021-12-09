@@ -83,12 +83,13 @@
             this.txIdC = new System.Windows.Forms.TextBox();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.pnGuardar = new System.Windows.Forms.Panel();
+            this.lbPath = new System.Windows.Forms.Label();
             this.lbNom_Cli = new System.Windows.Forms.Label();
             this.lbApellido = new System.Windows.Forms.Label();
             this.lbDireccion = new System.Windows.Forms.Label();
             this.lbTelefono = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lbPath = new System.Windows.Forms.Label();
+            this.chModificar = new System.Windows.Forms.CheckBox();
             this.pnFoo.SuspendLayout();
             this.pnGrillas.SuspendLayout();
             this.pnBusquedaDoc.SuspendLayout();
@@ -148,7 +149,7 @@
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(133, 23);
             this.btnGuardar.TabIndex = 6;
-            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Text = "Modificar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
@@ -584,6 +585,7 @@
             // 
             // pnGuardar
             // 
+            this.pnGuardar.Controls.Add(this.chModificar);
             this.pnGuardar.Controls.Add(this.btnEliminar);
             this.pnGuardar.Controls.Add(this.txIdC);
             this.pnGuardar.Controls.Add(this.lbViewTel);
@@ -609,6 +611,15 @@
             this.pnGuardar.Size = new System.Drawing.Size(682, 436);
             this.pnGuardar.TabIndex = 12;
             this.pnGuardar.Visible = false;
+            // 
+            // lbPath
+            // 
+            this.lbPath.AutoSize = true;
+            this.lbPath.Location = new System.Drawing.Point(15, 11);
+            this.lbPath.Name = "lbPath";
+            this.lbPath.Size = new System.Drawing.Size(0, 13);
+            this.lbPath.TabIndex = 0;
+            this.lbPath.Visible = false;
             // 
             // lbNom_Cli
             // 
@@ -654,14 +665,16 @@
             this.panel1.Size = new System.Drawing.Size(685, 80);
             this.panel1.TabIndex = 17;
             // 
-            // lbPath
+            // chModificar
             // 
-            this.lbPath.AutoSize = true;
-            this.lbPath.Location = new System.Drawing.Point(15, 11);
-            this.lbPath.Name = "lbPath";
-            this.lbPath.Size = new System.Drawing.Size(0, 13);
-            this.lbPath.TabIndex = 0;
-            this.lbPath.Visible = false;
+            this.chModificar.AutoSize = true;
+            this.chModificar.Location = new System.Drawing.Point(344, 357);
+            this.chModificar.Name = "chModificar";
+            this.chModificar.Size = new System.Drawing.Size(80, 17);
+            this.chModificar.TabIndex = 28;
+            this.chModificar.Text = "checkBox1";
+            this.chModificar.UseVisualStyleBackColor = true;
+            this.chModificar.Visible = false;
             // 
             // frmClients
             // 
@@ -758,5 +771,6 @@
         private System.Windows.Forms.Label lbTelefono;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lbPath;
+        private System.Windows.Forms.CheckBox chModificar;
     }
 }
