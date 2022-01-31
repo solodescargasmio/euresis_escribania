@@ -40,6 +40,8 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.Navy;
+            this.menuStrip1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.principalToolStripMenuItem,
             this.clientesToolStripMenuItem,
@@ -47,59 +49,72 @@
             this.usuarioToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1082, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1262, 25);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // principalToolStripMenuItem
             // 
+            this.principalToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
+            this.principalToolStripMenuItem.ForeColor = System.Drawing.Color.GhostWhite;
             this.principalToolStripMenuItem.Name = "principalToolStripMenuItem";
-            this.principalToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.principalToolStripMenuItem.Size = new System.Drawing.Size(53, 21);
             this.principalToolStripMenuItem.Text = "Inicio";
             this.principalToolStripMenuItem.Click += new System.EventHandler(this.principalToolStripMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
+            this.clientesToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
+            this.clientesToolStripMenuItem.ForeColor = System.Drawing.Color.GhostWhite;
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(73, 21);
             this.clientesToolStripMenuItem.Text = "Clientes";
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // tipoDocumentoToolStripMenuItem
             // 
+            this.tipoDocumentoToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
             this.tipoDocumentoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tipoToolStripMenuItem});
+            this.tipoDocumentoToolStripMenuItem.ForeColor = System.Drawing.Color.GhostWhite;
             this.tipoDocumentoToolStripMenuItem.Name = "tipoDocumentoToolStripMenuItem";
-            this.tipoDocumentoToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
+            this.tipoDocumentoToolStripMenuItem.Size = new System.Drawing.Size(96, 21);
             this.tipoDocumentoToolStripMenuItem.Text = "Documento";
             // 
             // tipoToolStripMenuItem
             // 
             this.tipoToolStripMenuItem.Name = "tipoToolStripMenuItem";
-            this.tipoToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.tipoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.tipoToolStripMenuItem.Text = "Tipo";
             this.tipoToolStripMenuItem.Click += new System.EventHandler(this.tipoToolStripMenuItem_Click_1);
             // 
             // usuarioToolStripMenuItem
             // 
+            this.usuarioToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
+            this.usuarioToolStripMenuItem.ForeColor = System.Drawing.Color.GhostWhite;
             this.usuarioToolStripMenuItem.Name = "usuarioToolStripMenuItem";
-            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(70, 21);
             this.usuarioToolStripMenuItem.Text = "Usuario";
             this.usuarioToolStripMenuItem.Click += new System.EventHandler(this.usuarioToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1082, 615);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            this.BackColor = System.Drawing.Color.Snow;
+            this.ClientSize = new System.Drawing.Size(1262, 615);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.Name = "frmPrincipal";
-            this.Text = "Principal";
+            this.Text = " Principal";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPrincipal_FormClosed);
+            this.Shown += new System.EventHandler(this.frmPrincipal_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

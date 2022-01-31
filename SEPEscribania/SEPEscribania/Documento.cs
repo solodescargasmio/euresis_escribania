@@ -12,6 +12,8 @@ namespace SEPEscribania
         private string Path;
         private string Titulo;
         private string Anio;
+        private int Usuario;
+        private string fecha;
 
         public string Anio1 { get => Anio; set => Anio = value; }
         public string Titulo1 { get => Titulo; set => Titulo = value; }
@@ -19,6 +21,8 @@ namespace SEPEscribania
         public int IdTipo { get => idTipo; set => idTipo = value; }
         public int IdCliente { get => idCliente; set => idCliente = value; }
         public int Id { get => id; set => id = value; }
+        public int Usuario1 { get => Usuario; set => Usuario = value; }
+        public string Fecha { get => fecha; set => fecha = value; }
 
         public Documento()
         {
@@ -30,9 +34,9 @@ namespace SEPEscribania
             int lOk = 0;
             DBConexion db = new DBConexion();
             db.AsignarComando();
-            string sSQL = "Insert Into documento (idTipo,idCliente,Path,Titulo,Anio)" +
+            string sSQL = "Insert Into documento (idTipo,idCliente,Path,Titulo,Anio,Usuario,Fecha)" +
                           " Values " +
-                          " ("+IdTipo+","+IdCliente+",'"+Path1+"','"+Titulo1+"','"+Anio1+"')";
+                          " ("+IdTipo+","+IdCliente+",'"+Path1+"','"+Titulo1+"','"+Anio1+"'," + Usuario1 + ",'" + Fecha + "')";
 
             if (db.Insertar(sSQL)) {
                 lOk = db.TraerUltimoTabla("documento");//Obtengo el id del documento actual para guardar las palabras de busqueda

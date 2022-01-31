@@ -33,13 +33,13 @@
             this.mensajeError = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.picLogo = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txPass = new System.Windows.Forms.TextBox();
             this.txUsuario = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.btnIniciar = new System.Windows.Forms.Button();
-            this.picLogo = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
@@ -61,7 +61,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(611, 541);
             this.panel1.TabIndex = 0;
-
             // 
             // mensajeError
             // 
@@ -91,6 +90,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(266, 3);
             this.panel2.TabIndex = 10;
+            // 
+            // picLogo
+            // 
+            this.picLogo.ImageLocation = "";
+            this.picLogo.Location = new System.Drawing.Point(134, 40);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(357, 205);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picLogo.TabIndex = 9;
+            this.picLogo.TabStop = false;
             // 
             // label2
             // 
@@ -122,6 +131,7 @@
             this.txPass.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txPass.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.txPass.Location = new System.Drawing.Point(191, 351);
+            this.txPass.MaxLength = 8;
             this.txPass.Name = "txPass";
             this.txPass.PasswordChar = '*';
             this.txPass.Size = new System.Drawing.Size(266, 18);
@@ -136,6 +146,7 @@
             this.txUsuario.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txUsuario.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.txUsuario.Location = new System.Drawing.Point(191, 284);
+            this.txUsuario.MaxLength = 8;
             this.txUsuario.Name = "txUsuario";
             this.txUsuario.Size = new System.Drawing.Size(266, 18);
             this.txUsuario.TabIndex = 4;
@@ -172,16 +183,6 @@
             this.btnIniciar.Click += new System.EventHandler(this.button1_Click);
             this.btnIniciar.MouseLeave += new System.EventHandler(this.btnIniciar_MouseLeave);
             this.btnIniciar.MouseHover += new System.EventHandler(this.btnIniciar_MouseHover_1);
-            // 
-            // picLogo
-            // 
-            this.picLogo.ImageLocation = "";
-            this.picLogo.Location = new System.Drawing.Point(134, 40);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(357, 205);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picLogo.TabIndex = 9;
-            this.picLogo.TabStop = false;
             // 
             // frmLogin
             // 

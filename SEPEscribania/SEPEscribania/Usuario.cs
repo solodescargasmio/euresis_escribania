@@ -6,7 +6,7 @@ namespace SEPEscribania
     class Usuario
     {
         private int id;
-        private string NomUsuario;
+        private int NomUsuario;
         private string Password;
         private string Nombre_Completo;
 
@@ -15,7 +15,7 @@ namespace SEPEscribania
         }
 
         public int Id { get => id; set => id = value; }
-        public string Usuario1 { get => NomUsuario; set => NomUsuario = value; }
+        public int Usuario1 { get => NomUsuario; set => NomUsuario = value; }
         public string Password1 { get => Password; set => Password = value; }
         public string Nombre_Completo1 { get => Nombre_Completo; set => Nombre_Completo = value; }
 
@@ -38,7 +38,7 @@ namespace SEPEscribania
 
             dataReader = db.TraerObjetoCampo("usuario","id",nId.ToString());
             while (dataReader.Read()) {
-                this.Usuario1 = dataReader.GetString("Usuario");
+                this.Usuario1 = dataReader.GetInt32("Usuario");
                 this.Password1 = dataReader.GetString("Pass");
                 this.Nombre_Completo1 = dataReader.GetString("Nombre_Completo");
             }
@@ -54,7 +54,7 @@ namespace SEPEscribania
             db.AsignarComando();
             string sSQL = "Insert Into usuario (Usuario,Pass,Nombre_Completo)" +
                           " Values " +
-                          " ('" + Usuario1 + "','" + Password1 + "','" + Nombre_Completo1 + "')";
+                          " (" + Usuario1 + ",'" + Password1 + "','" + Nombre_Completo1 + "')";
 
             if (db.Insertar(sSQL))
             {
@@ -73,7 +73,7 @@ namespace SEPEscribania
             DBConexion db = new DBConexion();
             db.AsignarComando();
             string sSQL = "Update usuario Set" +
-                          " Usuario ='" +Usuario1+"',"+
+                          " Usuario =" +Usuario1+","+
                           " Pass ='" +Password1+"',"+
                           " Nombre_Completo ='" +Nombre_Completo1+"'"+
                           " Where id= "+Id;
@@ -85,13 +85,13 @@ namespace SEPEscribania
 
             return lOk;
         }
-        public bool LoginUsuario() {
+        public int LoginUsuario() {
             /*
              Esta funcion vericica que el usuario exista en la BD y  
              que sean correctos los valores de login
              */
             bool lOk = false;
-            string sSQL = "Select * From usuario Where Usuario= '" + this.Usuario1 +"'"+
+            string sSQL = "Select * From usuario Where Usuario= " + this.Usuario1 +
                         " and Pass= '" + this.Password1+"'";
             int nId = 0;
             DBConexion db = new DBConexion();
@@ -100,10 +100,10 @@ namespace SEPEscribania
             while (dataReader.Read()) {
                 nId = dataReader.GetInt32("id");
             }
-            if (nId>0) {
+          /*  if (nId>0) {
                 lOk = true;
-            }
-            return lOk;
+            }*/
+            return nId;
         }
     }
 }

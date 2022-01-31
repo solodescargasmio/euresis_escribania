@@ -71,9 +71,9 @@ namespace SEPEscribania
             Esta funcion valida que los TextBox no esten vacios
              */
             bool lOk = true;
-            if (txParam.Text == "")
+            if ((txParam.Text == "") || (txParam.Text == "\r\n" ))
             {
-                MessageBox.Show("INGRESE VALOR " + sRes,"SEP");
+                MessageBox.Show("INGRESE VALOR " + sRes, "INFORMACION", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txParam.Focus();
                 lOk = false;
             }
@@ -85,9 +85,9 @@ namespace SEPEscribania
             Esta funcion valida que el campo cedula, no esté vacio
              */
             bool lOk = true;
-            if (txParam.Text == "")
+            if ((txParam.Text == "") || (txParam.Text == "\r\n"))
             {
-                MessageBox.Show("INGRESE VALOR " + sRes, "SEP");
+                MessageBox.Show("INGRESE VALOR " + sRes, "INFORMACION", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txParam.Focus();
                 lOk = false;
             }
@@ -100,7 +100,7 @@ namespace SEPEscribania
             bool lOk = true;
             if (txPara.Text != txPara2.Text)
             {
-                MessageBox.Show("LAS CONTRASEÑAS NO SON IGUALES", "SEP");
+                MessageBox.Show("LAS CONTRASEÑAS NO SON IGUALES", "INFORMACION", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txPara2.Clear();
                 txPara2.Focus();
                 lOk = false;

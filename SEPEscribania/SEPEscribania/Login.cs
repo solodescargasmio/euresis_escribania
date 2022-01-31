@@ -30,11 +30,15 @@ namespace SEPEscribania
             }
             if (lOk) {
                 Usuario usu = new Usuario();
-                usu.Usuario1 = txUsuario.Text;
+                usu.Usuario1 = Int32.Parse(txUsuario.Text);
                 
                 usu.Password1 = Utils.EncriptarPass(txPass);
-                if (usu.LoginUsuario())
+                int nId = usu.LoginUsuario();
+                if (nId>0)
                 {
+                    usu = usu.DevolverUsuario(nId);
+                    Session.User = Convert.ToString(usu.Usuario1);
+                    Session.Nombre = usu.Nombre_Completo1;
                     frmPrincipal frm = new frmPrincipal();
                     frm.Show();
                     this.Hide();
@@ -62,6 +66,11 @@ namespace SEPEscribania
 
         private void txPass_KeyPress(object sender, KeyPressEventArgs e)
         {
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;  //Si se presiona otro digito que no sea un numero, esto controla que no se escriba en el textbox
+            }else
             if (e.KeyChar==(char)Keys.Enter) {
                 MostrarError(txUsuario, "Contraseña");
                 btnIniciar.Focus();
@@ -75,12 +84,16 @@ namespace SEPEscribania
 
         private void txUsuario_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar==(char)Keys.Enter) {
-                MostrarError(txUsuario, "Usuario");
-                if (txUsuario.Text != "")
-                {
-                    txPass.Focus();
-                }
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;  //Si se presiona otro digito que no sea un numero, esto controla que no se escriba en el textbox
+            }
+            else if (e.KeyChar==(char)Keys.Enter) {
+                    MostrarError(txUsuario, "Usuario");
+                    if (txUsuario.Text != "")
+                    {
+                        txPass.Focus();
+                    }
             }
         }
 

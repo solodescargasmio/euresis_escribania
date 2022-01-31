@@ -1,14 +1,18 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Data;
+using System.Linq;
 
 namespace SEPEscribania
 {
     public partial class frmClient_new : Form, IContract
     {
+        public IContract cli_new { get; set; }//declara la clase contrato para luego pasar el valor 
         public frmClient_new()
         {
             InitializeComponent();
+            imgNuevoCliente.ImageLocation = Application.StartupPath +@"\img\usuarios.png";
             /*
              Esta parte se encarga de mostrar un cartel indicando el dato que se 
              espera, sea ingresado en la caja de texto en la que se encuentra el foco
@@ -39,7 +43,7 @@ namespace SEPEscribania
                     //lblFolder.Text = sPath;
                     if (txtCedula.Text == " .   .   -")
                     {
-                        MessageBox.Show("INGRESE EL DOCUMENTO DEL CLIENTE");
+                        MessageBox.Show("INGRESE EL DOCUMENTO DEL CLIENTE", "INFORMACION", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txtCedula.Focus();
                     }
                     else
@@ -155,25 +159,17 @@ namespace SEPEscribania
             lOk = Utils.Validar(txtCedula, "CI");
             if (lOk)
             {
-                lOk = Utils.Validar(txtNombre, "Nombre");
+                lOk = Utils.Validar(txtNombre, "NOMBRE");
             }
             if (lOk)
             {
-                lOk = Utils.Validar(txtApellido, "Apellido");
+                lOk = Utils.Validar(txtApellido, "APELLIDO");
             }
             if (lOk)
             {
-                lOk = Utils.Validar(txtDire, "Direccion");
+                lOk = Utils.Validar(txtDire, "DIRECCION");
             }
-          /*  if (lOk)
-            {
-                if (lblFolder.Text == "")
-                {
-                    MessageBox.Show("SELECCIONE UBICACION DONDE SE GUARDARAN LOS DOCUMENTOS PARA ESTE CLIENTE.");
-                    lOk = false;
-                }
 
-            }*/
             if (lOk)
             {
                 Cliente cli = new Cliente();
@@ -186,13 +182,14 @@ namespace SEPEscribania
                 cli.Carpeta1 = lblFolder.Text.Replace(@"\", @"\\");
                 if (cli.Guardar())
                 {
-                   /* if (!Directory.Exists(cli.Carpeta1)) //Si existe el directorio lo utiliza, sino, crea el directorio
-                    {
-                        Directory.CreateDirectory(cli.Carpeta1);
-                    }*/
                     IniPant();
-                    MessageBox.Show("CLIENTE INGRESADO CON EXITO");
-
+                    MessageBox.Show("CLIENTE INGRESADO CON EXITO", "INFORMACION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Form existe = Application.OpenForms.OfType<Form>().Where(pre => pre.Name == "frmClients").SingleOrDefault<Form>();
+                    if (existe != null) {
+                        string cedula = cli.CI1.ToString();
+                        cli_new.Ejecutar(cedula);
+                        this.Close();
+                    }
                 }
             }
         }
@@ -214,6 +211,20 @@ namespace SEPEscribania
             if (e.KeyChar == (char)13)
             {
                 txtDire.Focus();
+            }
+        }
+
+        private void txtDire_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter)) {
+                txtTel.Focus();
+            }
+        }
+
+        private void txtTel_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter)) {
+                txtCel.Focus();
             }
         }
     }

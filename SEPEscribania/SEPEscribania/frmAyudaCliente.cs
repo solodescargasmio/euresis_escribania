@@ -18,6 +18,10 @@ namespace SEPEscribania
         public frmAyudaCliente()
         {
             InitializeComponent();
+            
+            this.ttMensaje.SetToolTip(this.txNomAyuda, "FILTRO CEDULA CLIENTE SIN PUNTOS NI GUIONES");
+            this.ttMensaje.SetToolTip(this.txNom, "FILTRO POR APELLIDO DE CLIENTE");
+             
             TituloColumna();
         }
 
@@ -62,6 +66,10 @@ namespace SEPEscribania
                     dt.Rows.Add(dr);
 
                 }
+            }
+            else {
+                DataTable dat = (DataTable)dataGridView1.DataSource;
+                dat.Clear();
             }
 
         }
@@ -117,6 +125,10 @@ namespace SEPEscribania
                     dt.Rows.Add(dr);
 
                 }
+            }
+            else {
+                DataTable dat = (DataTable)dataGridView1.DataSource;
+                dat.Clear();
             }
 
         }

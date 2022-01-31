@@ -7,9 +7,15 @@ namespace SEPEscribania
 {
     public partial class frmPrincipal : Form
     {
+        LinkLabel link = new LinkLabel();
+        
         public frmPrincipal()
         {
             InitializeComponent();
+            link.Text = Session.User;
+            
+            this.Text = this.Text + "                                                                  " +
+                "                                               Bienvenido " + Session.Nombre;
         }
 
         private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -108,6 +114,16 @@ namespace SEPEscribania
 
             {
                 existe.Close();
+            }
+        }
+
+        private void frmPrincipal_Shown(object sender, EventArgs e)
+        {
+            Form existe = Application.OpenForms.OfType<Form>().Where(pre => pre.Name == "frmClients").SingleOrDefault<Form>();
+            if (existe == null) {
+                frmClients frm = new frmClients();
+                frm.MdiParent = this;
+                frm.Show();
             }
         }
     }
