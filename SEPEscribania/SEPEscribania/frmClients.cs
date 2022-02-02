@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
+using Microsoft.Office.Interop.Word;
 
 namespace SEPEscribania
 {
@@ -42,8 +43,9 @@ namespace SEPEscribania
             this.ttMensaje.SetToolTip(this.txT, "TITULO DEL DOCUMENTO A FILTRAR");
             this.ttMensaje.SetToolTip(this.txP, "PALABRAS INGRESADAS PARA FILTRAR DOCUMENTO");
             this.ttMensaje.SetToolTip(this.chBuscar, "MOSTRAR OPCIONES DOCUMENTO A FILTRAR");
+            this.ttMensaje.SetToolTip(this.btnActClient,"ACTUALIZA LISTA CLIENTES (SI AGREGA NUEVO Y NO APARECE)");
             //this.ttMensaje.SetToolTip(this.txT, "TITULO DEL DOCUMENTO A FILTRAR");
-
+            //pcbRecargar.ImageLocation = Application.StartupPath + @"\img\recargar.png";
             dtpFecha.Format = DateTimePickerFormat.Custom;
             dtpFecha.CustomFormat="yyyy";
             dtpFecha.ShowUpDown = true;
@@ -872,7 +874,7 @@ namespace SEPEscribania
              */
             using (frmClient_new form = new frmClient_new())
             {
-                form.cli_new = this;
+             //   form.cli_new = this;
                 form.ShowDialog(this);
             }
         }
@@ -901,9 +903,9 @@ namespace SEPEscribania
             CrearDir();
         }
 
-        private void trwCliente_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void btnActClient_Click(object sender, EventArgs e)
         {
-
+            LlenarCliente();
         }
     }
 }

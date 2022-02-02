@@ -14,6 +14,8 @@ namespace SEPEscribania
         private string Telefono;
         private string Celular;
         private string Otro;
+        private string Fecha_Registro;
+        private int Usuario;
 
         public int Id { get => id; set => id = value; }
         public int CI1 { get => CI; set => CI = value; }
@@ -24,6 +26,8 @@ namespace SEPEscribania
         public string Telefono1 { get => Telefono; set => Telefono = value; }
         public string Celular1 { get => Celular; set => Celular = value; }
         public string Otro1 { get => Otro; set => Otro = value; }
+        public string Fecha_Registro1 { get => Fecha_Registro; set => Fecha_Registro = value; }
+        public int Usuario1 { get => Usuario; set => Usuario = value; }
 
         public Cliente()
         {
@@ -38,10 +42,10 @@ namespace SEPEscribania
 
             //esta operacion abre la conexion y le asigna el command para ejecutar la sentencia
             conMysql.AsignarComando();
-            string sSQL = @"Insert Into cliente (CI,Nombre,Apellido,Direccion,Carpeta,Telefono,Celular,Otro) Values
+            string sSQL = @"Insert Into cliente (CI,Nombre,Apellido,Direccion,Carpeta,Telefono,Celular,Otro,Fecha_Registro,Usuario) Values
                               (" + this.CI1 + ",'" + this.Nombre1 + "','" + this.Apellido1 + "'," +
                           "'" + this.Direccion1 + "','" + this.Carpeta1 + "','" + this.Telefono1 + "'," +
-                          "'" + this.Celular1 + "','" + this.Otro1 + "');";
+                          "'" + this.Celular1 + "','" + this.Otro1 + "','" + this.Fecha_Registro1 + "'," + this.Usuario1 + ");";
             // esta operacion ejecuta la sentecia
             if (conMysql.Insertar(sSQL))
             {
@@ -84,6 +88,8 @@ namespace SEPEscribania
                            ",Telefono = " + cli.Telefono1 +
                            ",Celular = " + cli.Celular1 +
                            ",Otro = " + cli.Celular1 +
+                           ",Fecha_Registro = " + cli.Fecha_Registro1 +
+                           ",Usuario = " + cli.Usuario1 +
                            " Where id=" + cli.Id;
             if (db.Insertar(sSQL))
             {
@@ -107,16 +113,8 @@ namespace SEPEscribania
                 while (dataReader.Read())
                 {
                     Cliente cli = new Cliente();
-                    cli.Id = dataReader.GetInt32("id");
-                    cli.CI1 = dataReader.GetInt32("CI");
-                    cli.Nombre1 = dataReader.GetString("Nombre");
-                    cli.Apellido1 = dataReader.GetString("Apellido");
-                    cli.Direccion1 = dataReader.GetString("Direccion");
-                    cli.Carpeta1 = dataReader.GetString("Carpeta");
-                    cli.Telefono1 = dataReader.GetString("Telefono");
-                    cli.Celular1 = dataReader.GetString("Celular");
-                    cli.Otro1 = dataReader.GetString("Otro");
-                    clientes.Add(cli);
+
+                    clientes.Add(Traer(cli,dataReader));
 
                 }
                 db.CerrarConexion();
@@ -136,17 +134,8 @@ namespace SEPEscribania
             dataReader = db.TraerLike("cliente", "CI", nCedula.ToString());
             while (dataReader.Read())
             {
-                Cliente cli = new Cliente();
-                cli.Id = dataReader.GetInt32("id");
-                cli.CI1 = dataReader.GetInt32("CI");
-                cli.Nombre1 = dataReader.GetString("Nombre");
-                cli.Apellido1 = dataReader.GetString("Apellido");
-                cli.Direccion1 = dataReader.GetString("Direccion");
-                cli.Carpeta1 = dataReader.GetString("Carpeta");
-                cli.Telefono1 = dataReader.GetString("Telefono");
-                cli.Celular1 = dataReader.GetString("Celular");
-                cli.Otro1 = dataReader.GetString("Otro");
-                clientes.Add(cli);
+                Cliente cli = new Cliente();                
+                clientes.Add(Traer(cli,dataReader));
 
             }
             db.CerrarConexion();
@@ -166,16 +155,8 @@ namespace SEPEscribania
             while (dataReader.Read())
             {
                 Cliente cli = new Cliente();
-                cli.Id = dataReader.GetInt32("id");
-                cli.CI1 = dataReader.GetInt32("CI");
-                cli.Nombre1 = dataReader.GetString("Nombre");
-                cli.Apellido1 = dataReader.GetString("Apellido");
-                cli.Direccion1 = dataReader.GetString("Direccion");
-                cli.Carpeta1 = dataReader.GetString("Carpeta");
-                cli.Telefono1 = dataReader.GetString("Telefono");
-                cli.Celular1 = dataReader.GetString("Celular");
-                cli.Otro1 = dataReader.GetString("Otro");
-                clientes.Add(cli);
+                
+                clientes.Add(Traer(cli,dataReader));
             }
             db.CerrarConexion();
             return clientes;
@@ -190,15 +171,7 @@ namespace SEPEscribania
             MySqlDataReader dataReader = db.TraerObjetoCampo("cliente", "CI", nCedula.ToString());
             while (dataReader.Read())
             {
-                this.Id = dataReader.GetInt32("id");
-                this.CI1 = dataReader.GetInt32("CI");
-                this.Nombre1 = dataReader.GetString("Nombre");
-                this.Apellido1 = dataReader.GetString("Apellido");
-                this.Direccion1 = dataReader.GetString("Direccion");
-                this.Carpeta1 = dataReader.GetString("Carpeta");
-                this.Telefono1 = dataReader.GetString("Telefono");
-                this.Celular1 = dataReader.GetString("Celular");
-                this.Otro1 = dataReader.GetString("Otro");
+                Traer(this,dataReader);
             }
             db.CerrarConexion();
 
@@ -217,16 +190,8 @@ namespace SEPEscribania
             MySqlDataReader dataReader = db.EjecutarSQL(sSQL);
             while (dataReader.Read()) {
                 Cliente cli = new Cliente();
-                cli.Id = dataReader.GetInt32("id");
-                cli.CI1 = dataReader.GetInt32("CI");
-                cli.Nombre1 = dataReader.GetString("Nombre");
-                cli.Apellido1 = dataReader.GetString("Apellido");
-                cli.Direccion1 = dataReader.GetString("Direccion");
-                cli.Carpeta1 = dataReader.GetString("Carpeta");
-                cli.Telefono1 = dataReader.GetString("Telefono");
-                cli.Celular1 = dataReader.GetString("Celular");
-                cli.Otro1 = dataReader.GetString("Otro");
-                clientes.Add(cli);
+
+                clientes.Add(Traer(cli,dataReader));
             }
             return clientes;
         }
@@ -236,17 +201,24 @@ namespace SEPEscribania
             db.AsignarComando();
             MySqlDataReader dataReader = db.TraerObjetoCampo("cliente","id",nId.ToString());
             while (dataReader.Read()) {
-                this.Id = dataReader.GetInt32("id");
-                this.CI1 = dataReader.GetInt32("CI");
-                this.Nombre1 = dataReader.GetString("Nombre");
-                this.Apellido1 = dataReader.GetString("Apellido");
-                this.Direccion1 = dataReader.GetString("Direccion");
-                this.Carpeta1 = dataReader.GetString("Carpeta");
-                this.Telefono1 = dataReader.GetString("Telefono");
-                this.Celular1 = dataReader.GetString("Celular");
-                this.Otro1 = dataReader.GetString("Otro");
+                Traer(this,dataReader);
             }
             return this;
+        }
+
+        public Cliente Traer(Cliente cli, MySqlDataReader dataReader) {
+            cli.Id = dataReader.GetInt32("id");
+            cli.CI1 = dataReader.GetInt32("CI");
+            cli.Nombre1 = dataReader.GetString("Nombre");
+            cli.Apellido1 = dataReader.GetString("Apellido");
+            cli.Direccion1 = dataReader.GetString("Direccion");
+            cli.Carpeta1 = dataReader.GetString("Carpeta");
+            cli.Telefono1 = dataReader.GetString("Telefono");
+            cli.Celular1 = dataReader.GetString("Celular");
+            cli.Otro1 = dataReader.GetString("Otro");
+            cli.Fecha_Registro1 = dataReader.GetString("Fecha_Registro");
+            cli.Usuario1 = dataReader.GetInt32("Usuario");
+            return cli;
         }
 
     }

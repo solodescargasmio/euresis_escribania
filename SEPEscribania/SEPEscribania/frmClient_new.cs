@@ -7,8 +7,7 @@ using System.Linq;
 namespace SEPEscribania
 {
     public partial class frmClient_new : Form, IContract
-    {
-        public IContract cli_new { get; set; }//declara la clase contrato para luego pasar el valor 
+    {        
         public frmClient_new()
         {
             InitializeComponent();
@@ -26,6 +25,7 @@ namespace SEPEscribania
             this.ttMensaje.SetToolTip(this.btnFolder, "DIRECTORIO DONDE SE ALMACENAN LOS ARCHIVOS DEL CLIENTE.");
             this.ttMensaje.SetToolTip(this.btnGuardar, "GUARDA LA INFORMACION DEL CLIENTE EN LA BASE DE DATOS.");
             this.ttMensaje.SetToolTip(this.btnCancelar, "CIERRA EL FORMULARIO ACTUAL SIN REGISTRA LOS DATOS.");
+
 
         }
 
@@ -179,6 +179,10 @@ namespace SEPEscribania
                 cli.Direccion1 = txtDire.Text;
                 cli.Telefono1 = txtTel.Text;
                 cli.Celular1 = txtCel.Text;
+                cli.Fecha_Registro1 = Convert.ToString(DateTime.Now);
+                cli.Usuario1 = Int32.Parse(Session.User);
+
+
                 cli.Carpeta1 = lblFolder.Text.Replace(@"\", @"\\");
                 if (cli.Guardar())
                 {
@@ -186,8 +190,8 @@ namespace SEPEscribania
                     MessageBox.Show("CLIENTE INGRESADO CON EXITO", "INFORMACION", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Form existe = Application.OpenForms.OfType<Form>().Where(pre => pre.Name == "frmClients").SingleOrDefault<Form>();
                     if (existe != null) {
-                        string cedula = cli.CI1.ToString();
-                        cli_new.Ejecutar(cedula);
+                        string cedula = cli.CI1.ToString(); 
+                        Ejecutar(cedula);
                         this.Close();
                     }
                 }

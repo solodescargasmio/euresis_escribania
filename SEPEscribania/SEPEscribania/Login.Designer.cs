@@ -131,7 +131,7 @@
             this.txPass.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txPass.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.txPass.Location = new System.Drawing.Point(191, 351);
-            this.txPass.MaxLength = 8;
+            this.txPass.MaxLength = 6;
             this.txPass.Name = "txPass";
             this.txPass.PasswordChar = '*';
             this.txPass.Size = new System.Drawing.Size(266, 18);

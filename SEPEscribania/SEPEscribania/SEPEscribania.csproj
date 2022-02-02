@@ -157,5 +157,11 @@
   <ItemGroup>
     <None Include="Resources\logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\recargar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\recargar.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

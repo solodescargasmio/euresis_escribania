@@ -1,6 +1,6 @@
 ﻿namespace SEPEscribania
 {
-    public interface IContract
+   public interface IContract
     {
         void Ejecutar(string texto);
         void Ejecutar(string texto, string sPath);
